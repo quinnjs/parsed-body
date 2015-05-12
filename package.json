@@ -1,0 +1,31 @@
+{
+  "name": "parsed-body",
+  "version": "0.0.0",
+  "description": "Get the parsed body of a request",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quinnjs/parsed-body.git"
+  },
+  "keywords": [
+    "promise",
+    "request",
+    "body",
+    "parser"
+  ],
+  "author": {
+    "name": "Jan Krems",
+    "email": "jan.krems@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quinnjs/parsed-body/issues"
+  },
+  "homepage": "https://github.com/quinnjs/parsed-body#readme",
+  "devDependencies": {
+    "tape": "~4.0.0"
+  }
+}
