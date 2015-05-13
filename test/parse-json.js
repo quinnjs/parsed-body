@@ -58,7 +58,7 @@ test('Rejects invalid json', async(function *(t) {
   t.end();
 }));
 
-test('Honors content-length', async(function *(t) {
+test('content-length too low', async(function *(t) {
   let parseError;
   const client = yield getTestApp(async(function *(req) {
     try {
@@ -79,4 +79,33 @@ test('Honors content-length', async(function *(t) {
   t.equal(parseError.name, 'SyntaxError');
   t.equal(parseError.message, 'Unexpected end of input');
   t.end();
+}));
+
+test('content-length too high', async(function *(t) {
+  t.plan(3);
+
+  let parseError;
+  const client = yield getTestApp(async(function *(req) {
+    try {
+      console.log('body', yield parsedBody(req));
+    } catch (err) {
+      parseError = err;
+    }
+  }));
+
+  try {
+    yield client.post('/', {
+      body: '{}',
+      headers: { 'Content-Length': 3 }
+    });
+  } catch (e) {
+    t.equal(e.code, 'ECONNRESET',
+      'Connection reset because body could not be written');
+  }
+
+  setTimeout(function() {
+    t.equal(parseError.name, 'Error');
+    t.equal(parseError.code, 'ECONNABORTED');
+    t.end();
+  }, 300);
 }));

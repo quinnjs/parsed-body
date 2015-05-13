@@ -5,6 +5,7 @@ const getRawBody = require('raw-body');
 function withOptions(options) {
   options = options || {};
   const limit = options.limit || '1mb';
+  const timeout = options.timeout || 250;
 
   function parse(raw) {
     const str = raw.toString('utf8');
@@ -17,6 +18,7 @@ function withOptions(options) {
   }
 
   function parseJsonBody(req) {
+    if (timeout !== -1) req.setTimeout(timeout);
     const opts = { limit: limit };
     const length = req.headers['content-length'] | 0;
     if (length) options.length = length;
