@@ -26,6 +26,12 @@
   },
   "homepage": "https://github.com/quinnjs/parsed-body#readme",
   "devDependencies": {
+    "bluebird": "^2.9.25",
+    "gofer": "^2.3.7",
+    "quinn": "^3.2.0",
     "tape": "~4.0.0"
+  },
+  "dependencies": {
+    "raw-body": "^2.0.1"
   }
 }
